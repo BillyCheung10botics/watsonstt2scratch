@@ -9,8 +9,8 @@ The following browsers are supported,
 1. Chrome (tested on version 90.0.4430.93)
 2. Safari (tested on version 14.0.3)
 3. Firefox (tested on version 86.0.1 )
-you are welcome to report your tests on other platforms to billy.cheung@10botics.com.
 
+You are welcome to report your tests on other platforms to billy.cheung@10botics.com.
 This repository is under development (29/04/2021)
 ## How to use
 
