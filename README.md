@@ -1,20 +1,19 @@
-# TM2Scratch
+# WatsonSTT2Scratch
 
 *Read this in other languages: [English](README.md).*
 
-Watsonstt2Scratch allows speech recognition with IBM Watson in Scratch 3. The following platforms are supported, 
+WatsonSTT2Scratch allows speech recognition with IBM Watson in Scratch 3. The following platforms are supported, 
 1. Chrome Browser
 2. Safari Browser
 
 This scratch extension is inspired by [champierre](https://github.com/champierre/speech2scratch) and [IBM Watson STT](https://cloud.ibm.com/apidocs/speech-to-text)
 ## How to use
 
-### Image recognition
+### Speech recognition
+TO DO
 
-1. 
 
-
-## For Developers - How to run WatsonSTT extension on your computer
+## For Developers - How to run WatsonSTT2Scratch extension on your computer
 
 1. Setup LLK/scratch-gui on your computer.
 
@@ -24,26 +23,27 @@ This scratch extension is inspired by [champierre](https://github.com/champierre
     % npm install
     ```
 
-2. In scratch-gui folder, clone TM2Scratch. You will have tm2scratch folder under scratch-gui.
+2. In scratch-gui folder, clone WatsonSTT2Scratch. You will have a watsonstt2scratch folder under scratch-gui.
 
     ```
-    % git clone git@github.com:champierre/tm2scratch.git
+    % git clone https://github.com/BillyCheung10botics/watsonstt2scratch
     ```
 
-3. Run the install script.
+3. Run the install script with your json url containing watson token (for example, http://localhost:30000/WatsonToken.json of the below command). To generate a token url with IBM Iam API, please refer to https://github.com/BillyCheung10botics/watson_token_generator .
 
     ```
-    % sh tm2scratch/install.sh
+    % sh watsonstt2scratch/install.sh "http://localhost:30000/WatsonToken.json"
     ```
 
-4. Run Scratch, then go to http://localhost:8601/.
+4.  Modify the `webpack.config.js` to allow https server, add the following code to line 23.
+    ```
+    https: true
+    ```
+5. Run Scratch, then go to https://localhost:8601/.
 
     ```
-    % npm start
+    % npm start --https
     ```
 
 ### Demo & Links
-
-- TM2Scratch + micro:bit Extension
-
-  <img src="images/rsp.gif" />
+TO DO
