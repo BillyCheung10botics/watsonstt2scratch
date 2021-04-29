@@ -2,11 +2,16 @@
 
 *Read this in other languages: [English](README.md).*
 
-WatsonSTT2Scratch allows speech recognition with IBM Watson in Scratch 3. The following platforms are supported, 
-1. Chrome Browser
-2. Safari Browser
+WatsonSTT2Scratch allows speech recognition with IBM Watson in Scratch 3. 
+This scratch extension is inspired by [champierre](https://github.com/champierre/speech2scratch) and [IBM Watson STT](https://cloud.ibm.com/apidocs/speech-to-text).
 
-This scratch extension is inspired by [champierre](https://github.com/champierre/speech2scratch) and [IBM Watson STT](https://cloud.ibm.com/apidocs/speech-to-text)
+The following browsers are supported, 
+1. Chrome (tested on version 90.0.4430.93)
+2. Safari (tested on version 14.0.3)
+3. Firefox (tested on version 86.0.1 )
+you are welcome to report your tests on other platforms to billy.cheung@10botics.com.
+
+This repository is under development (29/04/2021)
 ## How to use
 
 ### Speech recognition
