@@ -40,7 +40,7 @@ TO DO
     % sh watsonstt2scratch/install.sh "http://localhost:30000/WatsonToken.json"
     ```
 
-4.  Modify the `webpack.config.js` to allow https server, add the following code to line 23.
+4.  Modify the `webpack.config.js` to allow https server by adding the following code to line 23.
     ```
     https: true
     ```
