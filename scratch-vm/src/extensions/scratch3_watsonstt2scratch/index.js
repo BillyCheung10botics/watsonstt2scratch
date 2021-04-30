@@ -1,26 +1,87 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const Cast = require('../../util/cast');
-const blockIconURI = 'data:image/png;base64,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';
+const formatMessage = require('format-message');
+const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAEbElEQVRYR8WYXUwUVxTH/7C7VWpbxBI3hKYkWw08lEQDxrhtUxXbREFtC6ZNjPXbtITWh7772Me+tk/Vhzax3T6QoNRKIdgEd1lRIlINCQmIWGEFl4XwvextzmXv9O7snZndnYHOE3vnzJnf/M/XveRhba87AKoNXnELwF6r1+dZGeR4n4nnrrd2wustSXEzOjqCj45+IK8ZcjgNyMGOHK3HpUvfZvRtF78+j66uv8h2BYBb/5CTgByu5+6AKVh1VbnShtaTVwqTU4BaSM0ACcLn24ZfA9eVH6GCdAKQw0UiMTDG4PVutlTRTOIkpBZuRwAJTlxvV5YjMj7mBCRnswuoqSersnVroSWgUS6Sn/PnjqO3t4fzOQIoQqwPXWlpMYKhfmVEa/bvRiw2pfyQ4eFRNNTX2AYcA+A9fOw0WgKXOYQcavpNSjY2XsSZs41ZQyZzscOOguzQJyfgcq22LoL88fJPqKs9nAJDkKSix+PJqC8Ko2AwhK+aTtrKQUbqyRdB6lUUSlr1R7L77NMjGBwc4GEfGnqCYw0HnAWkNnPttys5Q8qFsyaApMLQ4EP093bnDEk+WIJh+PGo8wqKcN9suYrFhXlDyFB3P9xu45wk9eiyHeLa+s+Rn+9SJr9RZYucbGr6BqdOX1A+S4ATE+P48ovjtnJwEcBL+kLRF41Rj6Tqdrlc6A4/TIMU+QfgF1tthjybAYr2YwZJ9+QKl8NrZ5Kw3Xs/RHfnTWwp9uKdfYdMe9yN5p+xvLxkmJMCMhqNYWpqGj98/x3a21tzniRsw8YCVL27j0Pd/rPVUkWyGxx4gEd9PUrI8oq3EH0xgUCgjU9fKg6xT8g2xHxz4D/wn2IEmEmoVyVmaAlcQXPzNfj976Wo/njkGXZVV8hrWe9m0uCEt+wgV8eiyMtYbAax6Vn+286G9R8AJbJy+qTLFVIUiJ0tfxmAYQJ6tbAIlbv2GBaEgKQNxJ6agygqLNbZMkxGI9qasE8uUITy9c4zyUFtU0Ch8dccNN1Gzs7GcD/Ypb2Hqt3lTj2sJRIrCHX8kZZvqi+3AmR1DaeQJ+1rOaRUJLJTguOlsMLQF75Nf8ZVR8nkM1EAWwzDkbxhBshKSstQ7d+f4mNhYR5tLVfTIAXco3s9WFqkIWNrSmnvNALkFWs0JWRI2mLNzU1zh1JorSJjJZwpoCmc7JnCvemV17CtsnJN4FRhyBhuMjrOWXWV6JhyQgjZYR0dLayGPz0o4CTA53RGyjhuWRjKgGlnDJUfAUe5F2z/nUx8tJHO4p1ZmQpA5vZ4EF9eNh38Am6g7x4mI3TqdKZSzYgJkL3p2443fNsR7mxDPK6GVOSc4/lm1KiZ3HhDHTeQSCQ0JWdmprAU531NLoh1gRMhYjv976Pg5U0pH/B6kVdVDOsSVhlEy0Ea7vJIC99q4zlJ6kqtZN2UU7UZJiDF2Pr7TpjnJICPATRnVX4OGesVYRU7qrChYCPGR0Yw9pSfT9ddNVWI5TXt37n/NxxB/Qvq4fCXEnc2qwAAAABJRU5ErkJggg==';
 const recognizeMic = require('watson-speech/speech-to-text/recognize-microphone');
 const fetch = require("node-fetch");
-
+// const TOKENJSON_URL = 'https://test.scratch.10botics.com/wt.json';
 const TOKENJSON_URL = 'http://localhost:30000/WatsonToken.json';
 var token= {
             clear: true,
             decodeStrings: false,
             format: true,
             hesitation: "",
-            model: "",
+            model: "en-US_BroadbandModel",
             objectMode: true,
             property: null,
             smartFormatting: true,
            };
 
+const AvailableLocales = ['en', 'ja', 'zh-cn', 'zh-tw'];
+const Message = {
+    mandarin : {
+        'zh-cn': "普通話",
+        'zh-tw': "普通話",
+        'ja': "普通話",
+        'en': "Mandarin"
+    },
+    english : {
+        'zh-cn': "英語",
+        'zh-tw': "英語",
+        'ja': "英語",
+        'en': "Englihsh"
+    },
+    match_speech: {
+        'zh-cn': "當我聽見 [SPEECH]",
+        'zh-tw': "當我聽見 [SPEECH]",
+        'ja': '[SPEECH]を聞いたとき',
+        'en': 'When I hear [SPEECH]'
+    },
+    select_language : {
+        'zh-cn': "選擇語言: [LANG]",
+        'zh-tw': "選擇語言: [LANG]",
+        'ja': "選擇語言: [LANG]",
+        'en': 'Select Language [LANG]'
+    },
+    start_recognition: {
+        'zh-cn': "語音識別 開始",
+        'zh-tw': "語音識別 開始",
+        'ja': "語音識別 開始",
+        'en': 'Start Recognition'
+    },
+    stop_recognition: {
+        'zh-cn': "語音識別 結束",
+        'zh-tw': "語音識別 結束",
+        'ja': "語音識別 結束",
+        'en': 'Stop Recognition'
+    },
+    get_speech: {
+        'zh-cn': "文字",
+        'zh-tw': "文字",
+        'ja': "文字",
+        'en': 'Speech'
+    },
+}
+
 class Scratch3WatsonSTT2Scratch {
+    get LANGUAGE_MENU () {
+        return [
+            {
+              text: Message.english[this._locale],
+              value: 'english'
+            },
+            {
+              text: Message.mandarin[this._locale],
+              value: 'mandarin'
+            }
+        ]
+      }
+
     constructor (runtime) {
         this.runtime = runtime;
         this.speech = '';
+        this.language = 'english'
         fetch(TOKENJSON_URL)
         .then(res => res.json())
         .then(data => {
@@ -36,32 +97,84 @@ class Scratch3WatsonSTT2Scratch {
     }
 
     getInfo () {
+        this._locale = this.setLocale();
         return {
             id: 'watsonstt2scratch',
             name: 'Speech Recognition',
+            color1: "#B8397D",
+            color2: "#2B54AB",
             blockIconURI: blockIconURI,
             blocks: [
+
+                {
+                    opcode: 'matchSpeech',
+                    blockType: BlockType.HAT,
+                    text: Message.match_speech[this._locale],
+                    arguments: {
+                        SPEECH: {
+                                type: ArgumentType.STRING,
+                                defaultValue: 'hello'
+                        }
+                    }         
+                },
+
+                {
+                    opcode: 'selectLanguage',
+                    blockType: BlockType.COMMAND,
+                    text: Message.select_language[this._locale],
+                    arguments: {
+                        LANG: {
+                            type: ArgumentType.STRING,
+                            menu: 'languageMenu',
+                            defaultValue: 'english'
+                        }
+                    }
+                },
+
                 {
                     opcode: 'startRecognition',
                     blockType: BlockType.COMMAND,
-                    text: 'Recognition Start'
+                    text: Message.start_recognition[this._locale]
                 },
 
                 {
                     opcode: 'stopRecognition',
                     blockType: BlockType.COMMAND,
-                    text: 'Recognition Stop'
+                    text: Message.stop_recognition[this._locale]
                 },
 
                 {
                     opcode: 'getSpeech',
                     blockType: BlockType.REPORTER,
-                    text: 'Speech'
+                    text: Message.get_speech[this._locale]
                 }
+
+
             ],
             menus: {
+                languageMenu: {
+                    acceptReporters: true,
+                    items: this.LANGUAGE_MENU
+                }
             }
         };
+    }
+    matchSpeech(args) {
+        let target = args.SPEECH.toLowerCase().match(/([^"\s?.',\!\=]+)/g);
+        // console.log(target);
+        let speech  = this.speech.toLowerCase().match(/([^"\s?.',\!\=]+)/g);
+        // console.log(speech);
+        return this.containsAllSubstrings(speech, target)
+    }
+
+    selectLanguage (args) {
+        // Allowable values: [ar-AR_BroadbandModel,ar-MS_BroadbandModel,ar-MS_Telephony,de-DE_BroadbandModel,de-DE_NarrowbandModel,de-DE_Telephony,en-AU_BroadbandModel,en-AU_NarrowbandModel,en-AU_Telephony,en-GB_BroadbandModel,en-GB_NarrowbandModel,en-GB_Telephony,en-US_BroadbandModel,en-US_Multimedia,en-US_NarrowbandModel,en-US_ShortForm_NarrowbandModel,en-US_Telephony,es-AR_BroadbandModel,es-AR_NarrowbandModel,es-CL_BroadbandModel,es-CL_NarrowbandModel,es-CO_BroadbandModel,es-CO_NarrowbandModel,es-ES_BroadbandModel,es-ES_NarrowbandModel,es-ES_Telephony,es-MX_BroadbandModel,es-MX_NarrowbandModel,es-PE_BroadbandModel,es-PE_NarrowbandModel,fr-CA_BroadbandModel,fr-CA_NarrowbandModel,fr-CA_Telephony,fr-FR_BroadbandModel,fr-FR_NarrowbandModel,fr-FR_Telephony,it-IT_BroadbandModel,it-IT_NarrowbandModel,it-IT_Telephony,ja-JP_BroadbandModel,ja-JP_NarrowbandModel,ko-KR_BroadbandModel,ko-KR_NarrowbandModel,nl-NL_BroadbandModel,nl-NL_NarrowbandModel,pt-BR_BroadbandModel,pt-BR_NarrowbandModel,pt-BR_Telephony,zh-CN_BroadbandModel,zh-CN_NarrowbandModel]
+        this.language = args.LANG;
+        if (this.language === 'english') {
+            Object.assign(token, {model: "en-US_BroadbandModel"});
+        } else if (this.language === 'mandarin') {
+            Object.assign(token, {model: "zh-CN_BroadbandModel"});
+        }
     }
 
     startRecognition () {
@@ -95,6 +208,35 @@ class Scratch3WatsonSTT2Scratch {
 
     getSpeech() {
         return this.speech;
+    }
+
+    setLocale() {
+        let locale = formatMessage.setup().locale;
+        if (AvailableLocales.includes(locale)) {
+          return locale;
+        } else {
+          return 'en';
+        }
+    }
+
+    //utility function----------------------------------
+    containsAllSubstrings(str, substrings) {
+        // reference---https://stackoverflow.com/questions/5582574/how-to-check-if-a-string-contains-text-from-an-array-of-substrings-in-javascript
+        // Dharmang, Jim Blackler
+        // str : a list containing words of a sentence
+        // substrings: a list of substrings
+        if (str) {
+            for (var i = 0; i != substrings.length; i++) {
+                var substring = substrings[i];
+                if (str.indexOf(substring) === -1) {
+                    return false;
+                }
+                }
+                return true; 
+        } else {
+            return false;
+        }
+
     }
 }
 module.exports = Scratch3WatsonSTT2Scratch;
