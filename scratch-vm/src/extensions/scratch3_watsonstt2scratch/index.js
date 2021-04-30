@@ -169,6 +169,7 @@ class Scratch3WatsonSTT2Scratch {
 
     selectLanguage (args) {
         // Allowable values: [ar-AR_BroadbandModel,ar-MS_BroadbandModel,ar-MS_Telephony,de-DE_BroadbandModel,de-DE_NarrowbandModel,de-DE_Telephony,en-AU_BroadbandModel,en-AU_NarrowbandModel,en-AU_Telephony,en-GB_BroadbandModel,en-GB_NarrowbandModel,en-GB_Telephony,en-US_BroadbandModel,en-US_Multimedia,en-US_NarrowbandModel,en-US_ShortForm_NarrowbandModel,en-US_Telephony,es-AR_BroadbandModel,es-AR_NarrowbandModel,es-CL_BroadbandModel,es-CL_NarrowbandModel,es-CO_BroadbandModel,es-CO_NarrowbandModel,es-ES_BroadbandModel,es-ES_NarrowbandModel,es-ES_Telephony,es-MX_BroadbandModel,es-MX_NarrowbandModel,es-PE_BroadbandModel,es-PE_NarrowbandModel,fr-CA_BroadbandModel,fr-CA_NarrowbandModel,fr-CA_Telephony,fr-FR_BroadbandModel,fr-FR_NarrowbandModel,fr-FR_Telephony,it-IT_BroadbandModel,it-IT_NarrowbandModel,it-IT_Telephony,ja-JP_BroadbandModel,ja-JP_NarrowbandModel,ko-KR_BroadbandModel,ko-KR_NarrowbandModel,nl-NL_BroadbandModel,nl-NL_NarrowbandModel,pt-BR_BroadbandModel,pt-BR_NarrowbandModel,pt-BR_Telephony,zh-CN_BroadbandModel,zh-CN_NarrowbandModel]
+        this.stopRecognition();
         this.language = args.LANG;
         if (this.language === 'english') {
             Object.assign(token, {model: "en-US_BroadbandModel"});
@@ -182,6 +183,7 @@ class Scratch3WatsonSTT2Scratch {
         .then(res => res.json())
         .then(data => {
             // console.log("fetched.....")
+            this.stopRecognition();
             const stturl = data.SPEECH_TO_TEXT_URL;
             const stttoken = data.SPEECH_TO_TEXT_TOKEN;
             Object.assign(token, {accessToken: stttoken, url: stturl});
@@ -225,7 +227,8 @@ class Scratch3WatsonSTT2Scratch {
         // Dharmang, Jim Blackler
         // str : a list containing words of a sentence
         // substrings: a list of substrings
-        if (str) {
+        if (str && substrings) {
+            // if both str and substrings are not null
             for (var i = 0; i != substrings.length; i++) {
                 var substring = substrings[i];
                 if (str.indexOf(substring) === -1) {
