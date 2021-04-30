@@ -30,7 +30,7 @@ const Message = {
         'zh-cn': "英語",
         'zh-tw': "英語",
         'ja': "英語",
-        'en': "Englihsh"
+        'en': "English"
     },
     match_speech: {
         'zh-cn': "當我聽見 [SPEECH]",
